@@ -61,6 +61,34 @@ python install.py            # ou : python install.py --silent --dir C:\Atlas
 
 Les données ne sont **jamais** envoyées sur Internet et ne sont pas incluses dans l'installateur.
 
+## Espace cloud (Google Drive, Dropbox, OneDrive)
+
+Dans **Sécurité & synchronisation → Espace cloud**, connectez votre compte pour enregistrer `atlas-sync.json` dans un **dossier privé de l'application** (Google Drive : dossier caché de l'appli ; Dropbox : `Applications/Atlas` ; OneDrive : `Applications/Atlas`), puis le récupérer depuis un autre PC. Atlas n'accède à aucun autre fichier de votre cloud.
+
+- Authentification officielle **OAuth 2.0 avec PKCE** dans votre navigateur : Atlas ne voit jamais votre mot de passe.
+- Les jetons d'accès sont chiffrés par Windows (DPAPI, compte courant) dans `%LOCALAPPDATA%\Atlas\cloud-tokens.dat`.
+- Cette fonction n'est disponible que dans l'application installée (pas dans `Atlas.html` ouvert seul).
+
+### Configuration (administrateur de l'application)
+
+Chaque fournisseur demande une **application OAuth** (gratuite). Créez-les une fois, puis renseignez leurs identifiants publics dans `CloudService.cs` (constantes `Default…`) ou dans `Documents\Atlas\cloud-config.json` :
+
+```json
+{
+  "google":    { "clientId": "…", "clientSecret": "…" },
+  "dropbox":   { "clientId": "…" },
+  "microsoft": { "clientId": "…" }
+}
+```
+
+| Fournisseur | À créer | Redirection autorisée | Autorisation |
+| --- | --- | --- | --- |
+| Google | Google Cloud Console → Identifiants → ID client OAuth, type **Application de bureau** | `http://127.0.0.1:51735/__cloud/callback` | `drive.appdata` |
+| Dropbox | App Console → **Scoped access**, **App folder** | `http://127.0.0.1:51735/__cloud/callback` | `files.content.read`, `files.content.write` |
+| Microsoft | Entra ID → Inscription d'application, comptes Microsoft personnels, plateforme **Mobile et bureau** | `http://localhost:51735/__cloud/callback` | `Files.ReadWrite.AppFolder` |
+
+Tant qu'un fournisseur n'est pas configuré, Atlas affiche « Non configuré » à côté de son nom.
+
 ## Mises à jour
 
 À chaque lancement, Atlas vérifie si une nouvelle version de `Atlas.html` est disponible sur la branche `main` de ce dépôt et la télécharge automatiquement. Aucune action n'est nécessaire : relancez simplement Atlas pour profiter des nouveautés. Hors connexion, la dernière version téléchargée est utilisée.

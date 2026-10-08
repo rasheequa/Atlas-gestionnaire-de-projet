@@ -19,7 +19,8 @@ var dataSync = Path.Combine(dataDir, "atlas-sync.json");
 if (!File.Exists(dataSync) && File.Exists(bundledSync))
     File.Copy(bundledSync, dataSync);
 
-await TryUpdateAsync(webDir, UpdateUrl);
+if (Environment.GetEnvironmentVariable("ATLAS_NO_UPDATE") is null)
+    await TryUpdateAsync(webDir, UpdateUrl);
 
 var port = int.TryParse(Environment.GetEnvironmentVariable("ATLAS_PORT"), out var customPort) ? customPort : Port;
 using var server = new AtlasServer(installDir, webDir, dataDir, port);
@@ -106,6 +107,7 @@ sealed class AtlasServer : IDisposable
     private readonly string webDir;
     private readonly string dataDir;
     private readonly HttpListener listener = new();
+    private readonly CloudService cloud;
     private CancellationTokenSource? cancellation;
 
     public AtlasServer(string installDir, string webDir, string dataDir, int port)
@@ -113,7 +115,9 @@ sealed class AtlasServer : IDisposable
         this.installDir = installDir;
         this.webDir = webDir;
         this.dataDir = dataDir;
+        cloud = new CloudService(dataDir, port);
         listener.Prefixes.Add($"http://127.0.0.1:{port}/");
+        listener.Prefixes.Add($"http://localhost:{port}/");
     }
 
     public void Start()
@@ -152,6 +156,12 @@ sealed class AtlasServer : IDisposable
     {
         try
         {
+            if (context.Request.Url?.AbsolutePath.StartsWith("/__cloud/", StringComparison.Ordinal) == true)
+            {
+                await cloud.HandleAsync(context);
+                return;
+            }
+
             if (context.Request.HttpMethod == "POST" &&
                 context.Request.Url?.AbsolutePath is "/__atlas_sync" or "/__atlas_export")
             {

@@ -621,6 +621,12 @@ textarea#card-desc:focus{ border-color:var(--brass); }
 .due-date-input[type=date]{ position:relative; }
 .due-date-input[type=date]::-webkit-calendar-picker-indicator{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; }
 .recurrence-select-wrap{ flex:0 0 auto; width:auto; }
+.cloud-list{ display:flex; flex-direction:column; gap:2px; }
+.cloud-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:2px 0; flex-wrap:wrap; }
+.cloud-name{ display:inline-flex; align-items:center; gap:9px; font-size:13px; color:var(--cream); }
+.cloud-state{ font-size:11px; color:var(--moss); margin-left:4px; }
+.cloud-actions{ display:inline-flex; align-items:center; gap:2px; }
+.cloud-note{ font-size:12px; color:var(--muted); padding:0 10px; }
 .recurrence-select-wrap select{
   appearance:none; -webkit-appearance:none; width:auto; padding-right:30px;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C7CEC6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
@@ -645,8 +651,8 @@ textarea#card-desc:focus{ border-color:var(--brass); }
 .color-dot:hover{ transform:scale(1.12); box-shadow:0 3px 10px rgba(0,0,0,0.3); }
 .color-dot:active{ transform:scale(.94); }
 .color-dot.selected{ border-color:#fff; box-shadow:0 0 0 2px var(--surface); }
-.label-list{ display:flex; flex-direction:column; gap:6px; }
-.label-row{ display:grid; grid-template-columns:36px minmax(0,1fr) auto auto; align-items:center; gap:9px; padding:6px 8px; border-radius:7px; background:transparent; }
+.label-list{ display:flex; flex-direction:column; gap:1px; }
+.label-row{ display:grid; grid-template-columns:36px minmax(0,1fr) auto auto; align-items:center; gap:9px; padding:2px 8px; border-radius:7px; background:transparent; }
 .label-color-trigger{ width:36px; height:20px; padding:0; border:0; border-radius:5px; cursor:pointer; flex-shrink:0; }
 .label-color-trigger:focus{ outline:none; box-shadow:none; }
 .label-color-options{ display:flex; flex-wrap:wrap; gap:5px; grid-column:1 / -1; padding:4px 0 2px; width:100%; }
@@ -1262,10 +1268,6 @@ select:focus{
       <button class="modal-close" id="bg-modal-close"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
     </div>
     <div class="modal-body">
-      <div>
-        <span class="modal-section-label">Couleurs unies</span>
-        <div class="bg-preset-grid" id="bg-preset-grid"></div>
-      </div>
       <details class="image-library">
         <summary><span>Bibliothèque d'images</span><span class="image-library-arrow" aria-hidden="true">∨</span></summary>
         <div class="image-grid" id="image-library-grid"><button type="button" class="image-item" title="Utiliser le fond Bloom bleu" aria-label="Utiliser le fond Bloom bleu" style="background-image: url(&quot;https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Bloom clair" aria-label="Utiliser le fond Bloom clair" style="background-image: url(&quot;https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Bleu abstrait" aria-label="Utiliser le fond Bleu abstrait" style="background-image: url(&quot;https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Ciel lumineux" aria-label="Utiliser le fond Ciel lumineux" style="background-image: url(&quot;https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Montagnes" aria-label="Utiliser le fond Montagnes" style="background-image: url(&quot;https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Forêt" aria-label="Utiliser le fond Forêt" style="background-image: url(&quot;https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Désert" aria-label="Utiliser le fond Désert" style="background-image: url(&quot;https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Lac" aria-label="Utiliser le fond Lac" style="background-image: url(&quot;https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Plage" aria-label="Utiliser le fond Plage" style="background-image: url(&quot;https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Ville moderne" aria-label="Utiliser le fond Ville moderne" style="background-image: url(&quot;https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Architecture" aria-label="Utiliser le fond Architecture" style="background-image: url(&quot;https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Neige" aria-label="Utiliser le fond Neige" style="background-image: url(&quot;https://images.unsplash.com/photo-1483664852095-d6cc6870702d?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Aurore" aria-label="Utiliser le fond Aurore" style="background-image: url(&quot;https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Vallée verte" aria-label="Utiliser le fond Vallée verte" style="background-image: url(&quot;https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Océan bleu" aria-label="Utiliser le fond Océan bleu" style="background-image: url(&quot;https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Récif turquoise" aria-label="Utiliser le fond Récif turquoise" style="background-image: url(&quot;https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Ciel violet" aria-label="Utiliser le fond Ciel violet" style="background-image: url(&quot;https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Sable doré" aria-label="Utiliser le fond Sable doré" style="background-image: url(&quot;https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Collines" aria-label="Utiliser le fond Collines" style="background-image: url(&quot;https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Planète bleue" aria-label="Utiliser le fond Planète bleue" style="background-image: url(&quot;https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Sous-bois" aria-label="Utiliser le fond Sous-bois" style="background-image: url(&quot;https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Galaxie" aria-label="Utiliser le fond Galaxie" style="background-image: url(&quot;https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Voie lactée" aria-label="Utiliser le fond Voie lactée" style="background-image: url(&quot;https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Espace rose" aria-label="Utiliser le fond Espace rose" style="background-image: url(&quot;https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Nébuleuse" aria-label="Utiliser le fond Nébuleuse" style="background-image: url(&quot;https://images.unsplash.com/photo-1464802686167-b939a6910659?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Terre dans l’espace" aria-label="Utiliser le fond Terre dans l’espace" style="background-image: url(&quot;https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Lune" aria-label="Utiliser le fond Lune" style="background-image: url(&quot;https://images.unsplash.com/photo-1532693322450-2cb5c511067d?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button><button type="button" class="image-item" title="Utiliser le fond Mars rouge" aria-label="Utiliser le fond Mars rouge" style="background-image: url(&quot;https://images.unsplash.com/photo-1614728263952-84ea256f9679?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&quot;);"></button></div>
@@ -3509,20 +3511,6 @@ function openBgModal(){
   const board = getActiveBoard();
   if(!board) return;
   renderImageLibrary();
-  const grid = document.getElementById('bg-preset-grid');
-  grid.innerHTML = "";
-  BOARD_COLORS.forEach(c=>{
-    const d = document.createElement('div');
-    d.className = 'bg-preset' + (board.background.type==='color' && board.background.value===c ? ' selected':'');
-    d.style.background = c;
-    d.addEventListener('click', ()=>{
-      board.background = {type:'color', value:c};
-      saveState(); applyBoardBackground(board); renderSidebar();
-      [...grid.children].forEach(x=>x.classList.remove('selected'));
-      d.classList.add('selected');
-    });
-    grid.appendChild(d);
-  });
   bgOverlay.classList.remove('hidden');
 }
 bgOverlay.addEventListener('click', (e)=>{ if(e.target===bgOverlay) bgOverlay.classList.add('hidden'); });
@@ -4365,6 +4353,100 @@ document.getElementById('new-cl-item').addEventListener('keydown', (e)=>{
 
 /* Security modal */
 const secOverlay = document.getElementById('security-modal-overlay');
+/* Espace cloud (Google Drive, Dropbox, OneDrive) via le serveur local Atlas */
+const CLOUD_PROVIDERS = [
+  {id:'google', name:'Google Drive', brand:'google'},
+  {id:'dropbox', name:'Dropbox', brand:'dropbox'},
+  {id:'microsoft', name:'OneDrive', brand:'onedrive'}
+];
+async function cloudCall(path, provider){
+  const response = await fetch(path, provider
+    ? {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({provider})}
+    : {cache:'no-store'});
+  const text = await response.text();
+  let data = null;
+  try{ data = JSON.parse(text); }catch(e){ /* réponse non JSON */ }
+  if(!response.ok) throw new Error((data && data.error) || `Erreur ${response.status}`);
+  return data;
+}
+async function renderCloudSection(){
+  const wrap = document.getElementById('cloud-section');
+  if(!wrap) return;
+  let status;
+  try{
+    status = await cloudCall('__cloud/status');
+  }catch(e){
+    wrap.innerHTML = `<p style="font-size:12.5px;color:var(--muted);margin:0;">La connexion à un compte cloud est disponible dans l'application Atlas installée (Atlas-Setup.exe).</p>`;
+    return;
+  }
+  wrap.innerHTML = CLOUD_PROVIDERS.map(provider=>{
+    const info = status[provider.id] || {};
+    const actions = !info.configured
+      ? `<span class="cloud-note">Non configuré</span>`
+      : info.connected
+        ? `<button class="btn" data-cloud="upload" data-provider="${provider.id}">${icon('upload',14)} Enregistrer</button>
+           <button class="btn" data-cloud="download" data-provider="${provider.id}">${icon('download',14)} Récupérer</button>
+           <button class="btn" data-cloud="disconnect" data-provider="${provider.id}">${icon('x',14)} Déconnecter</button>`
+        : `<button class="btn" data-cloud="connect" data-provider="${provider.id}">Se connecter</button>`;
+    return `<div class="cloud-row">
+      <span class="cloud-name">${cloudBrandIcon(provider.brand,18)} ${provider.name}${info.connected ? `<span class="cloud-state">Connecté</span>` : ''}</span>
+      <span class="cloud-actions">${actions}</span>
+    </div>`;
+  }).join('');
+  wrap.querySelectorAll('[data-cloud]').forEach(button=>{
+    button.addEventListener('click', ()=> cloudAction(button.dataset.cloud, button.dataset.provider, button));
+  });
+}
+async function cloudAction(action, providerId, button){
+  const provider = CLOUD_PROVIDERS.find(item=>item.id === providerId);
+  button.disabled = true;
+  try{
+    if(action === 'connect'){
+      await cloudCall('__cloud/connect', providerId);
+      toast(`Terminez la connexion à ${provider.name} dans votre navigateur…`);
+      for(let attempt = 0; attempt < 90; attempt++){
+        await new Promise(resolve=> setTimeout(resolve, 2000));
+        const status = await cloudCall('__cloud/status');
+        if(status[providerId] && status[providerId].connected){
+          toast(`${provider.name} est connecté.`);
+          break;
+        }
+      }
+    }else if(action === 'disconnect'){
+      await cloudCall('__cloud/disconnect', providerId);
+      toast(`${provider.name} déconnecté.`);
+    }else if(action === 'upload'){
+      writeLocalBackup(true);
+      await localBackupWrite;
+      await cloudCall('__cloud/upload', providerId);
+      toast(`Sauvegarde enregistrée sur ${provider.name}.`);
+    }else if(action === 'download'){
+      const parsed = await cloudCall('__cloud/download', providerId);
+      applyCloudBackup(parsed, provider.name);
+    }
+  }catch(error){
+    toast(error.message);
+  }finally{
+    renderCloudSection();
+  }
+}
+function applyCloudBackup(parsed, providerName){
+  if(parsed.encrypted) throw new Error("La sauvegarde est chiffrée.");
+  const incoming = parsed.data || parsed;
+  if(!incoming || !Array.isArray(incoming.boards) || incoming.boards.length === 0){
+    throw new Error("La sauvegarde ne contient aucun tableau.");
+  }
+  askConfirm(`Remplacer les données locales par la sauvegarde de ${providerName} ? Les modifications locales non enregistrées seront perdues.`, ()=>{
+    state = normalizeState(incoming);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    renderSidebar();
+    renderBoard();
+    writeLocalBackup(true);
+    toast(`Sauvegarde récupérée depuis ${providerName}.`);
+    renderSecurityModal();
+  });
+}
+
 function renderSecurityModal(){
   const body = document.getElementById('security-modal-body');
   body.innerHTML = `
@@ -4418,16 +4500,11 @@ function renderSecurityModal(){
       </div>
     </div>
     <div>
-      <span class="modal-section-label">Choisir un espace cloud</span>
+      <span class="modal-section-label">Espace cloud</span>
       <p style="font-size:12.5px;color:var(--muted);margin:0 0 10px;">
-        Installez l'application de bureau du fournisseur choisi, puis sélectionnez le fichier
-        <strong>atlas-sync.json</strong> dans son dossier synchronisé.
+        Connectez votre compte pour enregistrer votre sauvegarde <strong>atlas-sync.json</strong> dans un dossier privé de votre cloud, puis la récupérer depuis n'importe quel PC.
       </p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="btn btn-ghost cloud-sync-btn" data-provider="Google Drive">${cloudBrandIcon('google',16)} Google Drive</button>
-        <button class="btn btn-ghost cloud-sync-btn" data-provider="Dropbox">${cloudBrandIcon('dropbox',16)} Dropbox</button>
-        <button class="btn btn-ghost cloud-sync-btn" data-provider="OneDrive personnel">${cloudBrandIcon('onedrive',16)} OneDrive</button>
-      </div>
+      <div id="cloud-section" class="cloud-list"></div>
     </div>
     <div class="danger-zone" style="border-top:1px solid var(--line);padding-top:16px;">
       <span class="meta-line">Effacer toutes les données locales</span>
@@ -4460,13 +4537,7 @@ function renderSecurityModal(){
     renderImportTypeGrid();
     document.getElementById('import-type-modal-overlay').classList.remove('hidden');
   });
-  document.querySelectorAll('.cloud-sync-btn').forEach(button=>{
-    button.addEventListener('click', ()=>{
-      const provider = button.dataset.provider || "votre espace cloud";
-      toast(`Sélectionnez atlas-sync.json dans votre dossier ${provider}.`);
-      connectSyncFile(false);
-    });
-  });
+  renderCloudSection();
   document.getElementById('force-save-btn').addEventListener('click', forceSave);
   document.getElementById('force-save-btn').addEventListener('keydown', event=>{
     if(event.key === 'Enter' || event.key === ' '){
