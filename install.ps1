@@ -16,10 +16,20 @@ $url = "https://github.com/rasheequa/Atlas-gestionnaire-de-projet/releases/lates
 $installer = Join-Path $env:TEMP "Atlas-Setup.exe"
 
 Write-Host "Téléchargement d'Atlas..."
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-# Proxy d'entreprise : réutilise les identifiants Windows
-[Net.WebRequest]::DefaultWebProxy.Credentials = [Net.CredentialCache]::DefaultCredentials
-Invoke-WebRequest -Uri $url -OutFile $installer -UseBasicParsing
+try {
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+  # Proxy d'entreprise : réutilise les identifiants Windows
+  [Net.WebRequest]::DefaultWebProxy.Credentials = [Net.CredentialCache]::DefaultCredentials
+} catch { }
+
+try {
+  Invoke-WebRequest -Uri $url -OutFile $installer -UseBasicParsing
+} catch {
+  # Repli : curl.exe (livré avec Windows) gère l'authentification de proxy Windows
+  Write-Host "Nouvel essai avec curl.exe..."
+  curl.exe -sS --fail --proxy-negotiate -U ":" -L -o $installer $url
+  if ($LASTEXITCODE -ne 0) { throw "Téléchargement impossible : $url" }
+}
 
 $arguments = @()
 if ($Silent) { $arguments += "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART" }
