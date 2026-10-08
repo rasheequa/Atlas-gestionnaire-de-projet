@@ -1,0 +1,39 @@
+name: Release Atlas
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+
+      - name: Publish Atlas.exe
+        run: >
+          dotnet publish Atlas.App.csproj --configuration Release --runtime win-x64
+          --self-contained true --output publish
+          -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:EnableCompressionInSingleFile=true
+
+      - name: Build installer
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart("v")
+          & "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" /DRoot=. /DAppVersion=$version AtlasSetup.iss
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/Atlas-Setup.exe
+          generate_release_notes: true
