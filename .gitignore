@@ -1,0 +1,9 @@
+# Données personnelles : ne jamais publier
+atlas-sync.json
+exported/
+
+# Fichiers générés
+bin/
+obj/
+publish/
+dist/
