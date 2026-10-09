@@ -221,7 +221,7 @@ svg.icon{ display:block; flex-shrink:0; vertical-align:middle; }
   position:relative;
   transition: background .12s, opacity .12s, transform .12s;
 }
-.board-item.dragging{ opacity:.35; }
+.board-item.dragging{ opacity:.4; }
 .board-item:hover{ background:var(--surface-2); color:var(--cream); }
 .board-item.active{ background:var(--surface-3); color:var(--cream); border-color:transparent; }
 .board-swatch{ width:22px; height:16px; border-radius:4px; flex-shrink:0; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);}
@@ -299,7 +299,9 @@ svg.icon{ display:block; flex-shrink:0; vertical-align:middle; }
 .icon-btn.ghost-dark{ background:transparent; border:1px solid transparent; color:var(--muted); }
 .icon-btn.ghost-dark:hover{ background:rgba(255,255,255,0.08); color:var(--cream); transform:none; box-shadow:none; }
 .icon-btn.small.ghost-dark{ width:28px; height:28px; border-radius:6px; }
-.icon-btn.small.ghost-dark svg, .card-menu-btn svg{ width:16px; height:16px; }
+.icon-btn.small.ghost-dark svg{ width:16px; height:16px; }
+.card-menu-btn svg, .list-header .icon-btn svg{ width:14px; height:14px; }
+.list-header .icon-btn{ width:22px; height:22px; }
 /* Boutons d'action discrets : visibles uniquement au survol ou au focus clavier */
 .group-header .icon-btn,
 .list-header .icon-btn,
@@ -310,6 +312,7 @@ svg.icon{ display:block; flex-shrink:0; vertical-align:middle; }
   opacity:0; background:transparent; border-color:transparent;
   width:28px; height:28px; transition:opacity .12s ease, background .12s ease, color .12s ease;
 }
+.list-header .icon-btn.small.ghost-dark{ width:22px; height:22px; }
 .group-header:hover .icon-btn,
 .list-header:hover .icon-btn,
 .comment-row:hover .comment-menu,
@@ -349,7 +352,7 @@ svg.icon{ display:block; flex-shrink:0; vertical-align:middle; }
   box-shadow:0 6px 18px rgba(0,0,0,0.25);
   transition: outline .15s ease, background-color .15s ease, transform .2s ease, opacity .2s ease, box-shadow .2s ease;
 }
-.list-col.list-dragging{ opacity:.42; }
+.list-col.list-dragging{ opacity:.4; }
 .list-col.list-drop-target{ outline:none; }
 .list-col.list-arriving{ animation:list-arrival .32s cubic-bezier(.22,.8,.28,1); }
 @keyframes list-arrival{
@@ -378,11 +381,12 @@ svg.icon{ display:block; flex-shrink:0; vertical-align:middle; }
   user-select:none;
 }
 .list-header input.list-name{
-  flex:1; background:none; border:none; color:var(--cream); font-size:13.5px; font-weight:700;
-  letter-spacing:0.1px; padding:4px 4px; border-radius:5px;
+  flex:0 1 auto; field-sizing:content; min-width:4ch; max-width:70%;
+  background:none; border:none; color:var(--cream); font-size:13.5px; font-weight:700;
+  letter-spacing:0.1px; padding:4px 9px; margin-left:-5px; border-radius:5px;
 }
 .list-header input.list-name:hover, .list-header input.list-name:focus{ background:rgba(255,255,255,0.06); outline:none; }
-.list-count{ font-size:11px; color:var(--muted); background:rgba(255,255,255,0.06); padding:2px 7px; border-radius:10px; }
+.list-count{ margin-left:auto; font-size:11px; color:var(--muted); background:rgba(255,255,255,0.06); padding:2px 7px; border-radius:10px; }
 .card-stack{ flex:1; overflow-y:auto; padding:2px 10px 6px; display:flex; flex-direction:column; gap:7px; min-height:24px; user-select:none;}
 .archive-list-hidden .card-stack{ max-height:0; min-height:0; overflow:hidden; padding-top:0; padding-bottom:0; }
 .archive-stack-reveal{
@@ -411,7 +415,7 @@ svg.icon{ display:block; flex-shrink:0; vertical-align:middle; }
 }
 .card:hover{ box-shadow:0 3px 10px rgba(0,0,0,0.35); }
 .card:hover .card-menu-btn{ opacity:1; }
-.card.dragging{ opacity:0.35; }
+.card.dragging{ opacity:.4; }
 .card.is-done{
   opacity:0.72;
 }
@@ -419,7 +423,7 @@ svg.icon{ display:block; flex-shrink:0; vertical-align:middle; }
   text-decoration:line-through;
   color:var(--muted);
 }
-.card-top{ display:flex; align-items:center; gap:6px; padding-right:24px; }
+.card-top{ display:flex; align-items:center; gap:6px; padding-right:0; }
 .card-check{ width:15px; height:15px; margin:0 2px 0 0; padding:0; border:1px solid var(--line-strong); border-radius:4px; background:transparent; color:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; line-height:0; position:relative; align-self:center; }
 .card-check.checked{ background:transparent; border-color:transparent; color:#fff; }
 .card-check.checked::before{ content:''; position:absolute; width:14px; height:14px; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:4px; background:var(--moss); z-index:0; }
@@ -440,12 +444,13 @@ svg.icon{ display:block; flex-shrink:0; vertical-align:middle; }
   color:var(--moss);
 }
 .card-menu-btn{
-  position:absolute; top:6px; right:6px;
-  opacity:0; background:none; border:none; color:var(--muted); width:30px; height:30px;
+  position:absolute; top:5px; right:5px;
+  opacity:0; background:none; border:none; color:var(--muted); width:22px; height:22px;
   display:flex; align-items:center; justify-content:center; border-radius:5px; flex-shrink:0;
   transition: opacity .12s, background .12s, color .12s;
 }
-.card-menu-btn:hover{ background:rgba(255,255,255,0.08); color:var(--cream); }
+.card:hover .card-menu-btn{ background:var(--surface-3); }
+.card-menu-btn:hover{ background:rgba(255,255,255,0.14); color:var(--cream); }
 .card-labels{ display:flex; flex-wrap:wrap; gap:4px; }
 .chip{
   min-height:18px; width:auto; max-width:100%; border-radius:5px; opacity:0.95;
@@ -601,7 +606,7 @@ svg.icon{ display:block; flex-shrink:0; vertical-align:middle; }
   .card-schedule-row{ grid-template-columns:1fr; gap:12px; }
 }
 textarea#card-desc{
-  width:100%; min-height:90px; background:var(--surface-2); border:1px solid var(--line-strong);
+  width:100%; min-height:90px; max-height:260px; background:var(--surface-2); border:1px solid var(--line-strong);
   color:var(--cream); padding:10px; border-radius:7px; font-size:13.5px; resize:vertical; outline:none; line-height:1.5;
 }
 textarea#card-desc:focus{ border-color:var(--brass); }
@@ -712,9 +717,19 @@ textarea#card-desc:focus{ border-color:var(--brass); }
 }
 .switch.on::after{ left:16px; }
 .checklist-item{ display:flex; align-items:center; gap:8px; padding:4px 0; cursor:default; }
-.checklist-item .cl-text{ cursor:text; user-select:text; -webkit-user-select:text; }
-.checklist-item.dragging{ opacity:.45; }
-.checklist-item.drag-over{ border-top:1px solid var(--brass); }
+.checklist-item .cl-text{ cursor:text; user-select:text; -webkit-user-select:text; transition:background .12s ease, color .2s ease; }
+/* Surbrillance identique pour le nom d'une étiquette et le texte d'une tâche (une seule zone, légèrement agrandie) */
+.label-row input.lname-edit,
+.checklist-item .cl-text,
+.checklist-item .cl-text-input{
+  padding:3px 7px; margin:-3px -7px; border-radius:6px; line-height:1.4; min-width:0;
+}
+.label-row input.lname-edit{ height:26px; padding:0 7px; margin:0 0 0 -7px; line-height:normal; }
+.label-row input.lname-edit:hover, .label-row input.lname-edit:focus,
+.checklist-item .cl-text:hover,
+.checklist-item .cl-text-input:hover, .checklist-item .cl-text-input:focus{ background:rgba(255,255,255,0.08); }
+#checklist-items, #card-label-list{ margin-bottom:8px; }
+.checklist-item.dragging{ opacity:.4; }
 .checklist-item input[type=checkbox]{
   appearance:none; -webkit-appearance:none;
   width:18px; height:18px; border-radius:50%;
@@ -739,20 +754,37 @@ textarea#card-desc:focus{ border-color:var(--brass); }
 }
 .checklist-item .cl-text{ flex:1; font-size:13.5px; }
 .checklist-item .cl-text-input{
-  flex:1; min-width:0; height:20px; align-self:center; background:none; border:none;
-  color:var(--cream); font:inherit; font-size:13.5px; line-height:normal; padding:0;
-  border-radius:5px; outline:none; transition:background .12s ease, color .12s ease;
+  flex:1; align-self:center; background:none; border:none;
+  color:var(--cream); font:inherit; font-size:13.5px; outline:none; transition:background .12s ease, color .12s ease;
 }
 .checklist-item .cl-text-input:hover,
-.checklist-item .cl-text-input:focus{ background:rgba(255,255,255,0.06); }
+.checklist-item .cl-text-input:focus{ background:rgba(255,255,255,0.08); }
 .checklist-item .cl-text.done{ text-decoration:line-through; color:var(--muted); }
 .progress-bar{ height:6px; background:rgba(255,255,255,0.08); border-radius:4px; overflow:hidden; margin-bottom:8px; }
-.progress-fill{ height:100%; background:var(--moss); }
+.progress-fill{ height:100%; background:var(--moss); transition:width .5s cubic-bezier(.22,.8,.28,1); }
+.progress-fill.progress-bump{ animation:progress-bump .6s ease; }
+@keyframes progress-bump{ 0%{ filter:brightness(1.7); } 100%{ filter:brightness(1); } }
+/* Animation de la case d'une tâche qui vient d'être cochée */
+.checklist-item.just-checked input[type=checkbox]{ animation:check-pop .35s cubic-bezier(.22,.8,.28,1); }
+.checklist-item.just-checked input[type=checkbox]::before{ animation:check-dot .3s ease; }
+.checklist-item.just-checked .cl-text{ animation:task-done .45s ease; }
+@keyframes check-pop{ 0%{ transform:scale(.7); } 55%{ transform:scale(1.3); } 100%{ transform:scale(1.05); } }
+@keyframes check-dot{ 0%{ transform:scale(0); } 100%{ transform:scale(1); } }
+@keyframes task-done{ 0%{ color:var(--cream); } 100%{ color:var(--muted); } }
 .mini-input-row{ display:flex; gap:8px; margin-top:6px; }
 .mini-input-row input{
   flex:1; background:var(--surface-2); border:1px solid var(--line-strong); color:var(--cream);
   padding:7px 9px; border-radius:6px; font-size:13px; outline:none;
 }
+#new-cl-item, #new-label-name{ flex:0 1 260px; }
+/* Zone de dépôt : même cadre en pointillés pour tous les glisser-déposer (cartes, listes, tâches, tableaux) */
+.group-header.drop-into, #sidebar-root-drop.drop-into{ background:rgba(255,255,255,0.08); border-radius:6px; }
+.list-col.adding .add-card-btn{ display:none; }
+.inline-actions .btn-primary{ background:var(--surface-3); color:var(--cream); font-weight:600; }
+.inline-actions .btn-primary:hover{ background:var(--line-strong); color:var(--cream); }
+.card-check.just-checked{ animation:check-pop .35s cubic-bezier(.22,.8,.28,1); }
+.card-check.just-checked::before{ animation:card-dot .3s ease; }
+@keyframes card-dot{ 0%{ transform:translate(-50%,-50%) scale(0); } 100%{ transform:translate(-50%,-50%) scale(1); } }
 #card-recurrence-time{
   flex:0 0 76px;
   width:76px;
@@ -1231,7 +1263,6 @@ select:focus{
         <div id="checklist-items"></div>
         <div class="mini-input-row">
           <input id="new-cl-item" type="text" placeholder="Ajouter un élément…">
-          <button class="btn btn-ghost" id="new-cl-btn">Ajouter</button>
         </div>
       </div>
       <div>
@@ -1239,7 +1270,6 @@ select:focus{
         <div class="label-list" id="card-label-list"></div>
         <div class="mini-input-row">
           <input id="new-label-name" type="text" placeholder="Nouvelle étiquette…">
-          <button class="btn btn-ghost" id="new-label-btn">Ajouter</button>
         </div>
       </div>
       <div>
@@ -1418,7 +1448,8 @@ function icon(name, size){
     theme: '<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18z" fill="currentColor" stroke="none"/>',
     shield: '<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/>',
     mountain: '<path d="M3 20l6.5-9 3.5 4 2.5-3 5.5 8H3z"/><path d="M14.5 7.5a1.5 1.5 0 1 0 0 .01"/>',
-    pin: '<path d="M12 2l4 4-2 8 2 4-6 2-6-2 2-4-2-8 4-4z"/><path d="M12 14v6"/>',
+    pin: '<path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/>',
+    archive: '<rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/>',
     bell: '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/>',
     loader: '<path d="M12 3a9 9 0 1 0 9 9"/>',
     alert: '<path d="M12 3l9 17H3L12 3z"/><path d="M12 9v4M12 17h.01"/>',
@@ -1558,14 +1589,18 @@ function openArchiveScheduleModal(){
   };
 }
 
-function archiveCompletedCards(){
+function archiveCompletedCards(cutoff = null, onlyListId = null){
   let changed = false;
+  const cutoffTime = cutoff ? cutoff.getTime() : Infinity;
+  const archiveDay = localDateKey(cutoff || new Date());
   state.boards.forEach(board=>{
     let archiveList = board.lists.find(list => /archiv/i.test(String(list.name || '').trim()));
+    const isEligible = card => card && card.done && getCompletionTime(card) <= cutoffTime;
     const hasCompletedCards = board.lists.some(list =>
-      !isArchiveList(list) && list.cardIds.some(cardId => board.cards[cardId] && board.cards[cardId].done)
+      !isArchiveList(list) && (!onlyListId || list.id === onlyListId) &&
+      list.cardIds.some(cardId => isEligible(board.cards[cardId]))
     );
-    if(!archiveList && !hasCompletedCards) return;
+    if(!hasCompletedCards) return;
     if(!archiveList){
       archiveList = {id:uid(), name:'ARCHIVE', cardIds:[]};
       board.lists.push(archiveList);
@@ -1573,14 +1608,13 @@ function archiveCompletedCards(){
     }
     const archivedIds = new Set(archiveList.cardIds);
     board.lists.forEach(list=>{
-      if(list.id === archiveList.id) return;
+      if(list.id === archiveList.id || (onlyListId && list.id !== onlyListId)) return;
       const recurringCards = [];
       list.cardIds = list.cardIds.filter(cardId=>{
         const card = board.cards[cardId];
-        if(!card || !card.done || archivedIds.has(cardId)) return true;
-        card.done = true;
+        if(!isEligible(card) || archivedIds.has(cardId)) return true;
         if(card.recurrence) recurringCards.push(card);
-        card.archivedAt = todayISO();
+        card.archivedAt = archiveDay;
         card.updatedAt = todayISO();
         archiveList.cardIds.push(cardId);
         archivedIds.add(cardId);
@@ -1600,7 +1634,8 @@ function runWeeklyArchiveIfDue(){
   if(now < scheduled) return;
   const runKey = `${localDateKey(scheduled)} ${getArchiveSchedule().time}`;
   if(localStorage.getItem(WEEKLY_ARCHIVE_RUN_KEY) === runKey) return;
-  const changed = archiveCompletedCards();
+  // Seules les cartes terminées avant l'heure planifiée sont archivées
+  const changed = archiveCompletedCards(scheduled);
   localStorage.setItem(WEEKLY_ARCHIVE_RUN_KEY, runKey);
   if(changed){
     saveState();
@@ -1626,18 +1661,31 @@ function isArchiveList(list){
   return Boolean(list && /archiv/i.test(String(list.name || '').trim()));
 }
 
-function archiveWeekKey(iso){
-  const date = new Date(`${iso}T00:00:00`);
-  if(Number.isNaN(date.getTime())) return 'sans-date';
-  const firstDay = new Date(date.getFullYear(), 0, 1);
-  const week = Math.ceil((((date - firstDay) / 86400000) + firstDay.getDay() + 1) / 7);
-  return `${date.getFullYear()}-${String(week).padStart(2, '0')}`;
+function cardCompletionDate(card){
+  const value = card.completedAt || card.archivedAt || '';
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T00:00:00`) : new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
 }
 
-function archiveWeekLabel(iso){
-  if(!iso) return 'Date d’archivage inconnue';
-  const date = new Date(`${iso}T00:00:00`);
-  return Number.isNaN(date.getTime()) ? 'Date d’archivage inconnue' : `Semaine du ${date.toLocaleDateString('fr-FR', {day:'numeric', month:'short', year:'numeric'})}`;
+// Lundi de la semaine de fin de la carte (les archives sont regroupées par semaine de réalisation)
+function archiveWeekStart(card){
+  const date = cardCompletionDate(card);
+  if(!date) return null;
+  const monday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
+  return monday;
+}
+
+function archiveWeekKey(card){
+  const monday = archiveWeekStart(card);
+  return monday ? localDateKey(monday) : 'sans-date';
+}
+
+function archiveWeekLabel(card){
+  const monday = archiveWeekStart(card);
+  return monday
+    ? `Semaine du ${monday.toLocaleDateString('fr-FR', {day:'numeric', month:'short', year:'numeric'})}`
+    : 'Date inconnue';
 }
 
 function getCompletionTime(card){
@@ -2754,39 +2802,37 @@ function renderBoardItem(b, group){
     e.stopPropagation();
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/board-id', b.id);
+    startDrag('board', b.id, item, ()=> renderSidebar());
     setTimeout(()=> item.classList.add('dragging'), 0);
   });
   item.addEventListener('dragover', (e)=>{
-    if(!e.dataTransfer.types.includes('text/board-id')) return;
+    if(!activeDrag || activeDrag.type !== 'board') return;
     e.preventDefault();
-    e.stopPropagation();
     e.dataTransfer.dropEffect = 'move';
-    item.classList.add('board-drop-target');
-  });
-  item.addEventListener('dragleave', ()=> item.classList.remove('board-drop-target'));
-  item.addEventListener('drop', (e)=>{
-    e.preventDefault();
-    e.stopPropagation();
-    item.classList.remove('board-drop-target');
-    const fromId = e.dataTransfer.getData('text/board-id');
-    if(!fromId || fromId===b.id) return;
-    const arr = group ? group.boardIds : state.boards;
-    if(group){
-      const fromIdx = arr.indexOf(fromId);
-      const toIdx = arr.indexOf(b.id);
-      if(fromIdx===-1){ removeBoardFromAllGroups(fromId); arr.splice(arr.indexOf(b.id), 0, fromId); }
-      else if(fromIdx !== toIdx){ arr.splice(fromIdx,1); arr.splice(arr.indexOf(b.id),0,fromId); }
-    } else {
-      removeBoardFromAllGroups(fromId);
-      const fromIdx = state.boards.findIndex(x=>x.id===fromId);
-      const toIdx = state.boards.findIndex(x=>x.id===b.id);
-      if(fromIdx!==-1 && fromIdx!==toIdx){ const [moved] = state.boards.splice(fromIdx,1); state.boards.splice(state.boards.findIndex(x=>x.id===b.id),0,moved); }
-    }
-    saveState(); renderSidebar();
+    e.atlasHandled = true;
+    if(activeDrag.id === b.id) return;
+    const fromId = activeDrag.id;
+    const rect = item.getBoundingClientRect();
+    const after = e.clientY > rect.top + rect.height / 2;
+    moveDragged(item.parentElement, after ? item.nextSibling : item, ()=> setPendingDrop(()=>{
+      const arr = group ? group.boardIds : state.boards;
+      if(group){
+        const fromIdx = arr.indexOf(fromId);
+        if(fromIdx === -1) removeBoardFromAllGroups(fromId); else arr.splice(fromIdx, 1);
+        arr.splice(arr.indexOf(b.id) + (after ? 1 : 0), 0, fromId);
+      } else {
+        removeBoardFromAllGroups(fromId);
+        const fromIdx = state.boards.findIndex(x=>x.id===fromId);
+        if(fromIdx !== -1){
+          const [moved] = state.boards.splice(fromIdx, 1);
+          state.boards.splice(state.boards.findIndex(x=>x.id===b.id) + (after ? 1 : 0), 0, moved);
+        }
+      }
+      saveState(); renderSidebar();
+    }));
   });
   item.addEventListener('dragend', ()=>{
     item.classList.remove('dragging');
-    document.querySelectorAll('.board-drop-target').forEach(el=> el.classList.remove('board-drop-target'));
   });
   item.querySelector('[data-menu]').addEventListener('click', (e)=>{
     e.stopPropagation();
@@ -2828,7 +2874,6 @@ function renderGroupBlock(g, depth){
   });
   header.addEventListener('dragover', (e)=>{
     e.preventDefault();
-    e.stopPropagation();
     e.dataTransfer.dropEffect = 'move';
   });
   header.addEventListener('drop', (e)=>{
@@ -3159,8 +3204,50 @@ function renderList(board, list){
   });
   header.querySelector('[data-menu]').addEventListener('click', (e)=>{
     e.stopPropagation();
+    const sortList = (compare)=>{
+      list.cardIds.sort((a, b)=> compare(board.cards[a], board.cards[b]));
+      saveState(); renderBoard();
+    };
+    const dueValue = card => (card && card.due) || '9999-99-99';
+    const archivableCount = list.cardIds.filter(id=> board.cards[id] && board.cards[id].done).length;
     openMenu(e.currentTarget, [
-      ...(archiveList ? [{ label:"Planification de l’archivage", icon:"clock", action: openArchiveScheduleModal }] : []),
+      ...(archiveList ? [
+        { label:"Planification de l’archivage", icon:"clock", action: openArchiveScheduleModal },
+        { label:"Supprimer les archives de plus de 30 jours", icon:"trash", danger:true, action: ()=>{
+          const limit = Date.now() - 30 * 86400000;
+          const old = list.cardIds.filter(id=>{ const c = board.cards[id]; return c && getCompletionTime(c) < limit; });
+          if(!old.length){ toast("Aucune archive de plus de 30 jours."); return; }
+          askConfirm(`Supprimer définitivement ${old.length} carte(s) archivée(s) depuis plus de 30 jours ?`, ()=>{
+            old.forEach(id=> delete board.cards[id]);
+            list.cardIds = list.cardIds.filter(id=> board.cards[id]);
+            saveState(); renderBoard();
+          });
+        }}
+      ] : [
+        { label:"Renommer la liste", icon:"edit", action: ()=>{
+          const input = col.querySelector('.list-name');
+          input.focus(); input.select();
+        }},
+        { label:"Trier par titre (A → Z)", icon:"chevronRight", action: ()=> sortList((a, b)=> (a.title || '').localeCompare(b.title || '', 'fr', {sensitivity:'base'})) },
+        { label:"Trier par échéance", icon:"calendar", action: ()=> sortList((a, b)=> dueValue(a).localeCompare(dueValue(b))) },
+        { label:"Trier par date de création", icon:"clock", action: ()=> sortList((a, b)=> (a.createdAt || '').localeCompare(b.createdAt || '')) },
+        { label:"Trier par tâches terminées", icon:"checkCircle", action: ()=>{
+          const progressOf = card=>{
+            const items = (card && card.checklist) || [];
+            const done = items.filter(item=>item.done).length;
+            return {ratio: items.length ? done / items.length : -1, done};
+          };
+          sortList((a, b)=>{
+            const first = progressOf(a), second = progressOf(b);
+            return second.ratio - first.ratio || second.done - first.done;
+          });
+        }},
+        ...(archivableCount ? [{ label:`Archiver les cartes terminées (${archivableCount})`,         icon:"archive", action: ()=>{
+          archiveCompletedCards(null, list.id);
+          saveState(); renderBoard();
+          toast("Cartes terminées archivées.");
+        }}] : [])
+      ]),
       { label:"Supprimer la liste", icon:"trash", danger:true, action: ()=>{
         if(list.cardIds.length){
           askConfirm(`Supprimer la liste "${list.name}" et ses ${list.cardIds.length} carte(s) ?`, ()=>{
@@ -3184,12 +3271,12 @@ function renderList(board, list){
   header.addEventListener('dragstart', (e)=>{
     e.dataTransfer.setData('text/list-id', list.id);
     e.dataTransfer.effectAllowed = 'move';
-    col.classList.add('list-dragging');
-    document.querySelectorAll('.list-col').forEach(listElement=> listElement.classList.remove('list-drop-target'));
+    startDrag('list', list.id, col, ()=> renderBoard());
+    setTimeout(()=> col.classList.add('list-dragging'), 0);
   });
   header.addEventListener('dragend', ()=>{
     document.querySelectorAll('.list-col').forEach(listElement=>{
-      listElement.classList.remove('list-dragging', 'list-drop-target');
+      listElement.classList.remove('list-dragging');
     });
   });
   col.appendChild(header);
@@ -3201,9 +3288,8 @@ function renderList(board, list){
   let previousWeek = '';
   const cardIds = archiveList
     ? [...list.cardIds].sort((firstId, secondId)=>{
-        const first = board.cards[firstId]?.archivedAt || '';
-        const second = board.cards[secondId]?.archivedAt || '';
-        return second.localeCompare(first);
+        const first = board.cards[firstId], second = board.cards[secondId];
+        return (second ? getCompletionTime(second) : 0) - (first ? getCompletionTime(first) : 0);
       })
     : list.cardIds;
   cardIds.forEach(cid=>{
@@ -3213,11 +3299,11 @@ function renderList(board, list){
     if(!cardMatchesSearch(card) || !cardMatchesQuickFilter(card)) return;
     if(archiveList){
       if(hiddenArchiveLists.has(list.id)) return;
-      const week = archiveWeekKey(card.archivedAt);
+      const week = archiveWeekKey(card);
       if(week !== previousWeek){
         const separator = document.createElement('div');
         separator.className = 'archive-week-separator';
-        separator.textContent = archiveWeekLabel(card.archivedAt);
+        separator.textContent = archiveWeekLabel(card);
         stack.appendChild(separator);
         previousWeek = week;
       }
@@ -3227,32 +3313,34 @@ function renderList(board, list){
   col.appendChild(stack);
 
   col.addEventListener('dragover', (e)=>{
-    const types = e.dataTransfer.types;
-    if(types.includes('text/card-id') || types.includes('text/list-id')){
+    if(!activeDrag) return;
+    if(activeDrag.type === 'card'){
       e.preventDefault();
-      if(types.includes('text/list-id')) col.classList.add('list-drop-target');
-    }
-  });
-  col.addEventListener('dragleave', (e)=>{
-    if(!col.contains(e.relatedTarget)) return;
-    col.classList.remove('list-drop-target');
-  });
-  col.addEventListener('drop', (e)=>{
-    e.preventDefault();
-    col.classList.remove('list-drop-target');
-    const cardId = e.dataTransfer.getData('text/card-id');
-    if(cardId){
-      moveCardToList(board, cardId, list.id, findDropIndex(stack, e.clientY));
-      return;
-    }
-    const draggedListId = e.dataTransfer.getData('text/list-id');
-    if(draggedListId && draggedListId !== list.id){
-      const from = board.lists.findIndex(l=>l.id===draggedListId);
-      const to = board.lists.findIndex(l=>l.id===list.id);
-      if(from < 0 || to < 0) return;
-      const [moved] = board.lists.splice(from,1);
-      board.lists.splice(to,0,moved);
-      saveState(); renderBoard(); animateListArrival(list.id);
+      e.dataTransfer.dropEffect = 'move';
+      e.atlasHandled = true;
+      const target = getCardDropTarget(stack, e.clientY);
+      const cardId = activeDrag.id;
+      const targetId = target.card ? target.card.dataset.cardId : null;
+      moveDragged(stack, target.card, ()=> setPendingDrop(()=>{
+        const ids = list.cardIds.filter(id=>id !== cardId);
+        let index = targetId ? ids.indexOf(targetId) : ids.length;
+        if(index < 0) index = ids.length;
+        moveCardToList(board, cardId, list.id, index);
+      }));
+    }else if(activeDrag.type === 'list'){
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      e.atlasHandled = true;
+      const draggedId = activeDrag.id;
+      if(draggedId === list.id) return;
+      const container = col.parentElement;
+      // Position décidée d'après l'ordre réel à l'écran : on peut donc toujours revenir en arrière
+      const draggedAfter = !!(activeDrag.element.compareDocumentPosition(col) & Node.DOCUMENT_POSITION_PRECEDING);
+      moveDragged(container, draggedAfter ? col : col.nextSibling, ()=> setPendingDrop(()=>{
+        const order = [...container.querySelectorAll(':scope > .list-col')].map(item=>item.dataset.listId);
+        board.lists.sort((a, b)=> order.indexOf(a.id) - order.indexOf(b.id));
+        saveState(); renderBoard();
+      }));
     }
   });
 
@@ -3265,13 +3353,100 @@ function renderList(board, list){
   return col;
 }
 
-function findDropIndex(stack, clientY){
-  const cards = [...stack.querySelectorAll('.card')];
-  for(let i=0;i<cards.length;i++){
-    const r = cards[i].getBoundingClientRect();
-    if(clientY < r.top + r.height/2) return i;
+/* Glisser-déposer unifié : l'élément déplacé suit sa position en direct, les voisins glissent en douceur (animation FLIP) */
+let activeDrag = null;
+let pendingDrop = null;
+let lastDragMoveAt = 0;
+const DRAG_FLIP_SELECTORS = {card:'.card', list:'.list-col', task:'.checklist-item', board:'.board-item'};
+function startDrag(type, id, element, restore){
+  activeDrag = {type, id, element, restore};
+  lastDragMoveAt = 0;
+  lastMovePoint = null;
+}
+function setPendingDrop(action){ pendingDrop = action; }
+function flipAnimate(selector, mutate){
+  const items = [...document.querySelectorAll(selector)];
+  const first = new Map(items.map(item=>[item, item.getBoundingClientRect()]));
+  mutate();
+  items.forEach(item=>{
+    if(!activeDrag || item === activeDrag.element) return;
+    const before = first.get(item), after = item.getBoundingClientRect();
+    const dx = before.left - after.left, dy = before.top - after.top;
+    if(!dx && !dy) return;
+    item.style.transition = 'none';
+    item.style.transform = `translate(${dx}px, ${dy}px)`;
+    item.getBoundingClientRect();
+    item.style.transition = 'transform .14s cubic-bezier(.22,.8,.28,1)';
+    item.style.transform = '';
+    setTimeout(()=>{ item.style.transition = ''; }, 160);
+  });
+}
+// Place l'élément à la position demandée ; onPlaced est appelé une fois la position effective.
+// Pendant l'animation des voisins, les demandes sont ignorées : les éléments en mouvement ne doivent pas
+// servir de cible, sinon la liste déplacée et sa voisine se renvoient la balle en boucle.
+const DRAG_SETTLE_MS = 190;
+let dragPoint = {x:0, y:0};
+let lastMovePoint = null;
+document.addEventListener('dragover', (event)=>{ dragPoint = {x:event.clientX, y:event.clientY}; }, true);
+function moveDragged(container, beforeEl, onPlaced){
+  if(!activeDrag) return;
+  const element = activeDrag.element;
+  if(beforeEl === element || (element.parentNode === container && element.nextSibling === (beforeEl || null))){
+    onPlaced();
+    return;
   }
-  return cards.length;
+  if(performance.now() - lastDragMoveAt < DRAG_SETTLE_MS) return;
+  // Curseur immobile : on ne rebascule jamais (évite les allers-retours quand les tailles diffèrent)
+  if(lastMovePoint && Math.hypot(dragPoint.x - lastMovePoint.x, dragPoint.y - lastMovePoint.y) < 8) return;
+  lastDragMoveAt = performance.now();
+  lastMovePoint = {...dragPoint};
+  flipAnimate(DRAG_FLIP_SELECTORS[activeDrag.type], ()=> container.insertBefore(element, beforeEl || null));
+  onPlaced();
+}
+function endDrag(){
+  const drag = activeDrag;
+  activeDrag = null;
+  pendingDrop = null;
+  document.querySelectorAll('.drop-into').forEach(element=> element.classList.remove('drop-into'));
+  // Glissement annulé ou relâché hors zone : on remet l'affichage dans l'état réel des données
+  if(drag && drag.restore) drag.restore();
+}
+document.addEventListener('dragend', endDrag);
+document.addEventListener('drop', (event)=>{
+  const action = pendingDrop;
+  if(action && activeDrag){
+    pendingDrop = null;
+    activeDrag = null;
+    document.querySelectorAll('.drop-into').forEach(element=> element.classList.remove('drop-into'));
+    event.preventDefault();
+    event.stopPropagation();
+    action();
+  }
+}, true);
+function autoScrollWhileDragging(e){
+  const edge = 48, step = 16;
+  const canvas = document.getElementById('board-canvas');
+  if(canvas){
+    const rect = canvas.getBoundingClientRect();
+    if(e.clientY >= rect.top && e.clientY <= rect.bottom){
+      if(e.clientX < rect.left + edge) canvas.scrollLeft -= step;
+      else if(e.clientX > rect.right - edge) canvas.scrollLeft += step;
+    }
+  }
+  const stack = document.elementFromPoint(e.clientX, e.clientY)?.closest('.card-stack');
+  if(stack){
+    const rect = stack.getBoundingClientRect();
+    if(e.clientY < rect.top + edge) stack.scrollTop -= step;
+    else if(e.clientY > rect.bottom - edge) stack.scrollTop += step;
+  }
+}
+function getCardDropTarget(stack, clientY){
+  const cards = [...stack.querySelectorAll('.card:not(.dragging)')];
+  for(const card of cards){
+    const rect = card.getBoundingClientRect();
+    if(clientY < rect.top + rect.height / 2) return {card};
+  }
+  return {card: null};
 }
 function moveCardToList(board, cardId, targetListId, index){
   board.lists.forEach(l=>{ l.cardIds = l.cardIds.filter(id=>id!==cardId); });
@@ -3332,6 +3507,7 @@ function createNextRecurringCard(board, list, card){
 }
 
 function completeCard(board, list, card){
+  lastCheckedCardId = card.id;
   card.done = true;
   card.completedAt = new Date().toISOString();
   card.updatedAt = todayISO();
@@ -3341,10 +3517,12 @@ function completeCard(board, list, card){
   }
   saveState();
   renderBoard();
+  lastCheckedCardId = null;
 }
 
 function showInlineCardForm(col, board, list){
   const stack = col.querySelector('.card-stack');
+  if(col.classList.contains('adding')) return;
   const wrap = document.createElement('div');
   wrap.className = 'inline-card-form';
   wrap.innerHTML = `
@@ -3354,25 +3532,39 @@ function showInlineCardForm(col, board, list){
       <button class="btn btn-ghost" id="cancel-inline-card">${icon('x',14)}</button>
     </div>
   `;
+  col.classList.add('adding');
   stack.appendChild(wrap);
+  stack.scrollTop = stack.scrollHeight;
   const ta = wrap.querySelector('textarea');
   ta.focus();
+  // Le formulaire disparaît quand on clique ailleurs et le bouton « Ajouter une carte » revient
+  function close(){
+    document.removeEventListener('mousedown', outsideClick, true);
+    wrap.remove();
+    col.classList.remove('adding');
+  }
+  function outsideClick(event){
+    if(!wrap.contains(event.target)) close();
+  }
+  document.addEventListener('mousedown', outsideClick, true);
   function submit(){
     const title = ta.value.trim();
     if(!title) return;
     const id = uid();
     board.cards[id] = { id, title, desc:"", due:"", color: NEUTRAL, labelIds:[], checklist:[], done:false, pinned:false, following:false, attachments:[], createdAt:todayISO(), updatedAt:todayISO() };
     list.cardIds.push(id);
+    document.removeEventListener('mousedown', outsideClick, true);
     saveState(); renderBoard(); animateCardArrival(id);
   }
   wrap.querySelector('#save-inline-card').addEventListener('click', submit);
-  wrap.querySelector('#cancel-inline-card').addEventListener('click', renderBoard);
+  wrap.querySelector('#cancel-inline-card').addEventListener('click', close);
   ta.addEventListener('keydown', (e)=>{
     if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); submit(); }
-    if(e.key==='Escape'){ renderBoard(); }
+    if(e.key==='Escape'){ close(); }
   });
 }
 
+let lastCheckedCardId = null;
 function renderCard(board, list, card){
   const el = document.createElement('div');
   el.className = 'card';
@@ -3423,7 +3615,7 @@ function renderCard(board, list, card){
   el.innerHTML = `
     ${labelsHtml}
     <div class="card-top">
-      <button type="button" class="card-check ${card.done?'checked':''}" ${isArchiveList(list) ? 'disabled' : ''} aria-label="${isArchiveList(list) ? 'Carte archivée et terminée' : (card.done?'Marquer la carte comme non terminée':'Marquer la carte comme terminée')}">${card.done?icon('check',18):''}</button>
+      <button type="button" class="card-check ${card.done?'checked':''}${card.id === lastCheckedCardId ? ' just-checked' : ''}" ${isArchiveList(list) ? 'disabled' : ''} aria-label="${isArchiveList(list) ? 'Carte archivée et terminée' : (card.done?'Marquer la carte comme non terminée':'Marquer la carte comme terminée')}">${card.done?icon('check',18):''}</button>
       <div class="card-title">${escapeHtml(card.title)}</div>
       
       <button class="card-menu-btn" data-menu title="Options">${icon('dots',15)}</button>
@@ -3454,7 +3646,7 @@ function renderCard(board, list, card){
         if(card.done){ card.done = false; delete card.completedAt; card.updatedAt = todayISO(); saveState(); renderBoard(); }
         else completeCard(board, list, card);
       } }] : []),
-      ...(!isArchiveList(list) ? [{ label:"Archiver", icon:"download", action: ()=> archiveCard(board, card.id) }] : []),
+      ...(!isArchiveList(list) ? [{ label:"Archiver", icon:"archive", action: ()=> archiveCard(board, card.id) }] : []),
       ...(card.done ? [
         { label:"Trier les cartes par date croissante", icon:"chevronRight", action: ()=>{ sortDoneList(list, board, 'asc'); saveState(); renderBoard(); } },
         { label:"Trier les cartes par date décroissante", icon:"chevronLeft", action: ()=>{ sortDoneList(list, board, 'desc'); saveState(); renderBoard(); } }
@@ -3466,6 +3658,7 @@ function renderCard(board, list, card){
   el.addEventListener('dragstart', (e)=>{
     e.dataTransfer.setData('text/card-id', card.id);
     e.dataTransfer.effectAllowed = 'move';
+    startDrag('card', card.id, el, ()=> renderBoard());
     setTimeout(()=> el.classList.add('dragging'), 0);
   });
   el.addEventListener('dragend', ()=>{
@@ -4162,12 +4355,20 @@ document.getElementById('new-card-comment').addEventListener('keydown', (e)=>{
     document.getElementById('add-card-comment').click();
   }
 });
-/* Évite l'icône « interdit » lors du déplacement d'éléments Atlas */
+/* Évite l'icône « interdit » lors du déplacement d'éléments Atlas, et gère la zone de dépôt */
 document.addEventListener('dragover', (e)=>{
   const types = e.dataTransfer ? [...e.dataTransfer.types] : [];
-  if(types.some(type=> ['text/card-id','text/list-id','text/board-id','text/group-id'].includes(type))){
+  if(types.some(type=> ['text/card-id','text/list-id','text/board-id','text/group-id','text/checklist-id'].includes(type))){
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
+    if(types.includes('text/card-id') || types.includes('text/list-id')) autoScrollWhileDragging(e);
+    if(!e.atlasHandled){
+      pendingDrop = null;
+    }
+    const into = (types.includes('text/board-id') || types.includes('text/group-id')) && e.target.closest
+      ? e.target.closest('.group-header, #sidebar-root-drop') : null;
+    document.querySelectorAll('.drop-into').forEach(element=>{ if(element !== into) element.classList.remove('drop-into'); });
+    if(into) into.classList.add('drop-into');
   }
 });
 document.getElementById('card-delete-btn').addEventListener('click', ()=>{
@@ -4234,11 +4435,12 @@ function renderLabelList(board, card){
     wrap.appendChild(row);
   });
 }
-document.getElementById('new-label-btn').addEventListener('click', ()=>{
-  const board = getActiveBoard(); const card = board.cards[activeCardId];
+function addLabelFromInput(){
+  const board = getActiveBoard();
+  const card = board && board.cards[activeCardId];
   const input = document.getElementById('new-label-name');
   const name = input.value.trim();
-  if(!name) return;
+  if(!card || !name) return;
   const color = LABEL_COLORS[(board.labels.length) % LABEL_COLORS.length];
   const lbl = {id:uid(), name, color};
   board.labels.push(lbl);
@@ -4246,18 +4448,20 @@ document.getElementById('new-label-btn').addEventListener('click', ()=>{
   card.updatedAt = todayISO();
   input.value = "";
   saveState(); renderLabelList(board, card); renderBoard();
-});
+}
 document.getElementById('new-label-name').addEventListener('keydown', (e)=>{
-  if(e.key==='Enter'){ e.preventDefault(); document.getElementById('new-label-btn').click(); }
+  if(e.key==='Enter'){ e.preventDefault(); addLabelFromInput(); }
 });
+document.getElementById('new-label-name').addEventListener('blur', addLabelFromInput);
 
+let lastCheckedTaskId = null;
 function renderChecklist(card){
   const wrap = document.getElementById('checklist-items');
   wrap.innerHTML = "";
   (card.checklist||[]).forEach(item=>{
     const row = document.createElement('div');
-    row.className = 'checklist-item';
-    row.draggable = true;
+    row.className = 'checklist-item' + (item.id === lastCheckedTaskId ? ' just-checked' : '');
+    row.draggable = false;
     row.innerHTML = `
       <input type="checkbox" ${item.done?'checked':''}>
       <span class="cl-text ${item.done?'done':''}" tabindex="0">${escapeHtml(item.text)}</span>
@@ -4265,16 +4469,20 @@ function renderChecklist(card){
     `;
     row.querySelector('input').addEventListener('change', (e)=>{
       item.done = e.target.checked;
+      if(item.done) lastCheckedTaskId = item.id;
       card.updatedAt = todayISO();
       saveState(); renderChecklist(card); renderBoard();
     });
     const textEl = row.querySelector('.cl-text');
-    // Le drag de la ligne est désactivé pendant la sélection du texte
-    textEl.addEventListener('mousedown', ()=>{
-      row.draggable = false;
-      const restore = ()=>{ row.draggable = true; document.removeEventListener('mouseup', restore); };
+    // Le glisser-déposer ne démarre que depuis la case à cocher, pour pouvoir sélectionner le texte
+    row.draggable = false;
+    const checkbox = row.querySelector('input');
+    checkbox.addEventListener('mousedown', ()=>{
+      row.draggable = true;
+      const restore = ()=>{ row.draggable = false; document.removeEventListener('mouseup', restore); };
       document.addEventListener('mouseup', restore);
     });
+    row.addEventListener('dragend', ()=>{ row.draggable = false; });
     const editItem = ()=>{
       if(row.querySelector('.cl-text-input')) return;
       const input = document.createElement('input');
@@ -4301,28 +4509,33 @@ function renderChecklist(card){
       };
     };
     textEl.addEventListener('click', editItem);
-    row.addEventListener('dragstart', ()=>{ row.classList.add('dragging'); });
-    row.addEventListener('dragend', ()=>{ row.classList.remove('dragging'); wrap.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over')); });
-    row.addEventListener('dragover', (event)=>{
-      event.preventDefault();
-      if(!row.classList.contains('dragging')) row.classList.add('drag-over');
+    row.addEventListener('dragstart', (e)=>{
+      e.stopPropagation();
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/checklist-id', item.id);
+      startDrag('task', item.id, row, ()=> renderChecklist(card));
+      setTimeout(()=> row.classList.add('dragging'), 0);
     });
-    row.addEventListener('dragleave', ()=> row.classList.remove('drag-over'));
-    row.addEventListener('drop', (event)=>{
+    row.addEventListener('dragend', ()=>{ row.classList.remove('dragging'); });
+    row.addEventListener('dragover', (event)=>{
+      if(!activeDrag || activeDrag.type !== 'task') return;
       event.preventDefault();
-      row.classList.remove('drag-over');
-      const dragged = wrap.querySelector('.dragging');
-      if(!dragged || dragged === row) return;
-      const fromId = dragged.dataset.itemId;
-      const toId = row.dataset.itemId;
-      const fromIndex = card.checklist.findIndex(entry=>entry.id === fromId);
-      const toIndex = card.checklist.findIndex(entry=>entry.id === toId);
-      if(fromIndex < 0 || toIndex < 0) return;
-      const [moved] = card.checklist.splice(fromIndex, 1);
-      const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
-      card.checklist.splice(adjustedIndex, 0, moved);
-      card.updatedAt = todayISO();
-      saveState(); renderChecklist(card); renderBoard();
+      event.dataTransfer.dropEffect = 'move';
+      event.atlasHandled = true;
+      if(activeDrag.id === item.id) return;
+      const rect = row.getBoundingClientRect();
+      const after = event.clientY > rect.top + rect.height / 2;
+      const fromId = activeDrag.id;
+      moveDragged(wrap, after ? row.nextSibling : row, ()=> setPendingDrop(()=>{
+        const fromIndex = card.checklist.findIndex(entry=>entry.id === fromId);
+        if(fromIndex < 0) return;
+        const [moved] = card.checklist.splice(fromIndex, 1);
+        const toIndex = card.checklist.findIndex(entry=>entry.id === item.id);
+        if(toIndex < 0){ card.checklist.splice(fromIndex, 0, moved); return; }
+        card.checklist.splice(toIndex + (after ? 1 : 0), 0, moved);
+        card.updatedAt = todayISO();
+        saveState(); renderChecklist(card); renderBoard();
+      }));
     });
     row.dataset.itemId = item.id;
     row.querySelector('.icon-btn').addEventListener('click', ()=>{
@@ -4334,22 +4547,31 @@ function renderChecklist(card){
   });
   const total = (card.checklist||[]).length;
   const done = (card.checklist||[]).filter(i=>i.done).length;
-  document.getElementById('cl-progress').style.width = total ? `${Math.round(done/total*100)}%` : '0%';
+  const progress = document.getElementById('cl-progress');
+  progress.style.width = total ? `${Math.round(done/total*100)}%` : '0%';
+  if(lastCheckedTaskId){
+    progress.classList.remove('progress-bump');
+    void progress.offsetWidth;
+    progress.classList.add('progress-bump');
+    lastCheckedTaskId = null;
+  }
 }
-document.getElementById('new-cl-btn').addEventListener('click', ()=>{
-  const board = getActiveBoard(); const card = board.cards[activeCardId];
+function addChecklistFromInput(){
+  const board = getActiveBoard();
+  const card = board && board.cards[activeCardId];
   const input = document.getElementById('new-cl-item');
   const text = input.value.trim();
-  if(!text) return;
+  if(!card || !text) return;
   card.checklist = card.checklist || [];
   card.checklist.push({id:uid(), text, done:false});
   card.updatedAt = todayISO();
   input.value = "";
   saveState(); renderChecklist(card); renderBoard();
-});
+}
 document.getElementById('new-cl-item').addEventListener('keydown', (e)=>{
-  if(e.key==='Enter'){ e.preventDefault(); document.getElementById('new-cl-btn').click(); }
+  if(e.key==='Enter'){ e.preventDefault(); addChecklistFromInput(); }
 });
+document.getElementById('new-cl-item').addEventListener('blur', addChecklistFromInput);
 
 /* Security modal */
 const secOverlay = document.getElementById('security-modal-overlay');
